@@ -50,9 +50,26 @@ state_names={"Alarm":['yes','no'], "MaryCalls":['yes', 'no']},
 alarm_model.add_cpds(
     cpd_burglary, cpd_earthquake, cpd_alarm, cpd_johncalls, cpd_marycalls)
 
-alarm_infer = VariableElimination(alarm_model)
+# alarm_infer = VariableElimination(alarm_model)
+#
+# print(alarm_infer.query(variables=["JohnCalls"],evidence={"Earthquake":"yes"}))
+# q = alarm_infer.query(variables=["JohnCalls", "Earthquake"],evidence={"Burglary":"yes","MaryCalls":"yes"}))
+# print(q)
+# Perform inference
+infer = VariableElimination(alarm_model)
 
-print(alarm_infer.query(variables=["JohnCalls"],evidence={"Earthquake":"yes"}))
-q = alarm_infer.query(variables=["JohnCalls", "Earthquake"],evidence={"Burglary":"yes","MaryCalls":"yes"}))
-print(q)
+# The probability of Mary Calling given that John called
+mary_calling_given_john_called = infer.query(variables=['MaryCalls'], evidence={'JohnCalls': 'yes'})
+
+#The probability of both John and Mary calling given Alarm
+john_and_mary_calling_given_alarm = infer.query(variables=['JohnCalls', 'MaryCalls'], evidence={'Alarm': 'yes'})
+
+#The probability of Alarm, given that Mary called
+alarm_given_mary_called = infer.query(variables=['Alarm'], evidence={'MaryCalls': 'yes'})
+
+# to see the results
+print("P(Mary Calls | John Calls):", mary_calling_given_john_called)
+print("P(John Calls, Mary Calls | Alarm):", john_and_mary_calling_given_alarm)
+print("P(Alarm | Mary Calls):", alarm_given_mary_called)
+
 
