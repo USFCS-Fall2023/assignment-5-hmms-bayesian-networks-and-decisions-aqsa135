@@ -195,71 +195,71 @@ class HMM:
 def main():
 
     #part 1
-    # model = HMM()
-    # model.load('two_english')
-    #
-    # # Print the entire transitions dictionary to check its structure
-    # print("Transitions dictionary:")
-    # print(model.transitions)
-    #
-    # # Print the entire emissions dictionary to check its structure
-    # print("\nEmissions dictionary:")
-    # print(model.emissions)
-    #
-    # # print a specific entry from each dictionary to check the format
-    # print("\nSample transition probabilities for '#' state:")
-    # if '#' in model.transitions:
-    #     print(model.transitions['#'])
-    # else:
-    #     print("No '#' state found in transitions.")
-    #
-    # print("\nSample emission probabilities for 'C' state:")
-    # if 'C' in model.emissions:
-    #     print(model.emissions['C'])
-    # else:
-    #     print("No 'C' state found in emissions.")
-    #
+    model = HMM()
+    model.load('two_english')
+
+    # Print the entire transitions dictionary to check its structure
+    print("Transitions dictionary:")
+    print(model.transitions)
+
+    # Print the entire emissions dictionary to check its structure
+    print("\nEmissions dictionary:")
+    print(model.emissions)
+
+    # print a specific entry from each dictionary to check the format
+    print("\nSample transition probabilities for '#' state:")
+    if '#' in model.transitions:
+        print(model.transitions['#'])
+    else:
+        print("No '#' state found in transitions.")
+
+    print("\nSample emission probabilities for 'C' state:")
+    if 'C' in model.emissions:
+        print(model.emissions['C'])
+    else:
+        print("No 'C' state found in emissions.")
+
     #
     #
     # # model = HMM()
     # #part2
-    # model.load('partofspeech.browntags.trained')
-    #
-    # # Generate 20 random observations (tags and words)
-    # tags, words = model.generate(20)
-    # print('Tags:', ' '.join(tags))
-    # print('Words:', ' '.join(words))
+    model.load('partofspeech.browntags.trained')
+
+    # Generate 20 random observations (tags and words)
+    tags, words = model.generate(20)
+    print('Tags:', ' '.join(tags))
+    print('Words:', ' '.join(words))
 
     # Part 3
 
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('basename', help='Base name for the .trans and .emit files')
-    # parser.add_argument('--forward', help='File with the sequence of observations for the forward algorithm')
-    # args = parser.parse_args()
-    #
-    # model = HMM()
-    # model.load(args.basename)
-    #
-    # # Debugging Print the transitions dictionary after loading
-    # # print("Transitions dictionary after loading:")
-    # # print(model.transitions)
-    #
-    # if args.forward:
-    #     with open(args.forward, 'r') as f:
-    #         observations = f.read().strip().split()
-    #
-    #         # Debugging: Print the transitions dictionary right before calling forward
-    #         # print("Transitions dictionary right before forward:")
-    #         # print(model.transitions)
-    #
-    #         final_state_prob = model.forward(observations)
-    #         print(f'The probability of the final state is: {final_state_prob}')
-    #     # final_state_prob = model.forward(observations)
-    #     # print(f'The probability of the final state is: {final_state_prob}')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('basename', help='Base name for the .trans and .emit files')
+    parser.add_argument('--forward', help='File with the sequence of observations for the forward algorithm')
+    args = parser.parse_args()
+
+    model = HMM()
+    model.load(args.basename)
+
+    # Debugging Print the transitions dictionary after loading
+    # print("Transitions dictionary after loading:")
+    # print(model.transitions)
+
+    if args.forward:
+        with open(args.forward, 'r') as f:
+            observations = f.read().strip().split()
+
+            # Debugging: Print the transitions dictionary right before calling forward
+            # print("Transitions dictionary right before forward:")
+            # print(model.transitions)
+
+            final_state_prob = model.forward(observations)
+            print(f'The probability of the final state is: {final_state_prob}')
+        # final_state_prob = model.forward(observations)
+        # print(f'The probability of the final state is: {final_state_prob}')
 
 
     #Part 4
-    model = HMM()
+    # model = HMM()
     model.load('partofspeech.browntags.trained')
 
     with open('ambiguous_sents.obs', 'r') as f:
